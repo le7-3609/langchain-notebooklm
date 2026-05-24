@@ -4,27 +4,21 @@ from langgraph.prebuilt import create_react_agent
 from src.tools import get_tools
 
 # ── System Prompt ─────────────────────────────────────────────────────────────
-SYSTEM_PROMPT = """You are an expert research assistant. Your sole task is to collect
-high-quality internet sources about the topic given by the user.
-
-Follow these rules strictly:
-1. Run MULTIPLE targeted searches — vary the query wording to cover different angles
-   (e.g. overview, recent news, expert opinion, official documentation).
-2. Aim to discover at least 8-12 distinct, trustworthy sources.
-3. Group the sources you find into 2-4 themed clusters (e.g. "Overview & Background",
-   "Recent Developments", "Expert Analysis", "Official / Academic Sources").
-4. For every source output exactly:
-      Title      : <page title>
-      URL        : <full URL>
-      Description: <1-2 sentence snippet describing the content>
-      Relevance  : <why this is useful for the topic>
-5. Do NOT summarise the content — only collect and organise the sources.
-6. After presenting all sources, ask the user to review and approve them."""
+# Kept intentionally short — every token here is repeated on every LLM call.
+SYSTEM_PROMPT = (
+    "You are a research assistant. Your job is to find internet sources about "
+    "the user's topic.\n"
+    "Rules:\n"
+    "1. Run 2-3 different searches using varied query wording.\n"
+    "2. For each source list: Title, URL, one-sentence description, relevance.\n"
+    "3. Group results into 2-3 themes.\n"
+    "4. Do NOT summarise content — only collect sources."
+)
 
 
 def create_agent():
     """Build and return the LangGraph ReAct research agent."""
-    llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)  # 12k TPM free tier
     tools = get_tools()
     agent = create_react_agent(llm, tools, prompt=SYSTEM_PROMPT)
     return agent

@@ -21,7 +21,8 @@ def main() -> None:
 
     agent = create_agent()
     result = agent.invoke(
-        {"messages": [{"role": "user", "content": f"Research the following topic and collect sources: {topic}"}]}
+        {"messages": [{"role": "user", "content": f"Research the following topic and collect sources: {topic}"}]},
+        {"recursion_limit": 8},  # caps at ~3 search rounds before context overflows free-tier TPM
     )
 
     last_message = result["messages"][-1]
