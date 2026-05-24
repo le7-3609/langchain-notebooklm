@@ -121,3 +121,8 @@ The Human-in-the-Loop pause is implemented with LangGraph's `interrupt()` / `Com
 | [Streamlit](https://streamlit.io/) | Browser UI |
 | [Rich](https://github.com/Textualize/rich) | Pretty terminal output (CLI mode) |
 | [python-dotenv](https://pypi.org/project/python-dotenv/) | `.env` secret loading |
+
+---
+## License
+
+This project is licensed under the [MIT License](LICENSE).
