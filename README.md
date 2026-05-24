@@ -2,6 +2,14 @@
 
 A miniature research assistant inspired by Google NotebookLM. You give it a topic, it searches the web, presents the sources it found, you approve the ones you want, and the graph continues with your selection. Built with LangGraph, Tavily, Groq (Llama 3.3 70B), and a Streamlit UI.
 
+## Purpose
+
+This project helps you do fast, human-reviewed topic research.
+
+- It finds web sources for a topic using an agent with search tools.
+- It pauses for Human-in-the-Loop approval before continuing.
+- It returns curated sources you can trust more than fully automatic output.
+
 ---
 
 ## How it works
@@ -98,6 +106,16 @@ The Human-in-the-Loop pause is implemented with LangGraph's `interrupt()` / `Com
 
    The app opens at `http://localhost:8501`.
 
+## Run
+
+After setup and `.env` configuration, run:
+
+```bash
+streamlit run app.py
+```
+
+Then open `http://localhost:8501` in your browser.
+
 ---
 
 ## Usage
@@ -107,6 +125,16 @@ The Human-in-the-Loop pause is implemented with LangGraph's `interrupt()` / `Com
 3. A numbered table of discovered sources appears — tick the ones you want to keep.
 4. Click **Approve selected** (or approve all / reject all).
 5. The graph resumes and the approved sources are stored in the final state.
+
+---
+
+## Example questions the agent can answer
+
+- "What are the latest breakthroughs in solid-state battery technology in 2025?"
+- "Find reliable sources comparing RAG vs fine-tuning for enterprise chatbots."
+- "What are the current FDA-approved uses of CRISPR-based therapies?"
+- "Collect sources about the impact of AI copilots on developer productivity."
+- "What are the best practices for securing LangChain/LangGraph apps in production?"
 
 ---
 
