@@ -65,6 +65,10 @@ def _extract_sources(text: str) -> list[dict]:
     return [{"index": i + 1, "title": f"Source {i + 1}", "url": u} for i, u in enumerate(urls)]
 
 
+# Public alias — importable by app.py and future modules without leading underscore
+extract_sources = _extract_sources
+
+
 def show_and_collect_approvals(sources_text: str) -> list[dict]:
     """
     1. Print the raw research findings inside a panel.
@@ -110,5 +114,6 @@ def show_and_collect_approvals(sources_text: str) -> list[dict]:
         chosen = {int(n.strip()) for n in raw.split(",")}
         return [s for s in sources if s["index"] in chosen]
     except ValueError:
-        console.print("[red]Could not parse input — approving all sources.[/red]")
+        console.print("[red]Could not parse input —" \
+        " approving all sources.[/red]")
         return sources
